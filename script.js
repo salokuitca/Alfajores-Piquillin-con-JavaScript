@@ -42,7 +42,7 @@ function anotarCompra() {
     var pruebaDdl = new Compra (alfajorDulceDeLeche.nombre, ddlCantidad, (ddlCantidad*alfajorDulceDeLeche.precio));
     var pruebaMarroc = new Compra (bombonMarroc.nombre, marrocCantidad, (marrocCantidad*bombonMarroc.precio));
     var pruebaNuez = new Compra (alfajorNuez.nombre, nuezCantidad, (nuezCantidad*alfajorNuez.precio));
-    var pruebaNutella = new Compra (bombonNutella.nombre, nutellaCantidad, (nuezCantidad*bombonNutella.precio));
+    var pruebaNutella = new Compra (bombonNutella.nombre, nutellaCantidad, (nutellaCantidad*bombonNutella.precio));
 
     
     /*Fin Creación de la compra en una variable del tipo objeto Compra*/
@@ -52,23 +52,27 @@ function anotarCompra() {
     for (var i = 0; i < 4; i++) {
         switch (i) {
         case 0:
-            if (ddlCantidad != "") {
+            if (ddlCantidad != 0) {
             prueba.agregarAlCarrito(pruebaDdl);
+            $("#DDL").val(0);
             }
         break;
         case 1:
-            if (nuezCantidad != "") {
+            if (nuezCantidad != 0) {
             prueba.agregarAlCarrito(pruebaNuez);
+            $("#NUEZ").val(0);
             }
         break;
         case 2:
-            if (marrocCantidad != "") {
+            if (marrocCantidad != 0) {
             prueba.agregarAlCarrito(pruebaMarroc);
+            $("#MARROC").val(0);
             }
         break;
         case 3:
-            if (nutellaCantidad != "") {
+            if (nutellaCantidad != 0) {
             prueba.agregarAlCarrito(pruebaNutella);
+            $("#NUTELLA").val(0);
             }
         break;
         }
@@ -86,22 +90,27 @@ var carrito2= JSON.parse (localStorage.getItem('carrito'));
 /*Inicio Carga de datos del carrito en carrito.html*/
 
 /*Inicio carga en carrito.html de la cantidad a comprar elegida por el usuario y el precio correspondiente*/
+var precioTotal = 80;
 for (var i = 0; i<carrito2.compraEnCarrito.length; i++){
     if (carrito2.compraEnCarrito[i].tipoProducto == "D") {
         $("#cantidadDdl").html(carrito2.compraEnCarrito[i].cantidad);
         $("#precioDdl").html(carrito2.compraEnCarrito[i].precio);
+        precioTotal = precioTotal + carrito2.compraEnCarrito[i].precio;
         
     } else if (carrito2.compraEnCarrito[i].tipoProducto == "Z"){
         $("#cantidadNuez").html(carrito2.compraEnCarrito[i].cantidad);
         $("#precioNuez").html(carrito2.compraEnCarrito[i].precio);
+        precioTotal = precioTotal + carrito2.compraEnCarrito[i].precio;
 
     } else if (carrito2.compraEnCarrito[i].tipoProducto == "M") {
         $("#cantidadMarroc").html(carrito2.compraEnCarrito[i].cantidad);
         $("#precioMarroc").html(carrito2.compraEnCarrito[i].precio);
+        precioTotal = precioTotal + carrito2.compraEnCarrito[i].precio;
         
     } else if (carrito2.compraEnCarrito[i].tipoProducto == "N"){
         $("#cantidadNutella").html(carrito2.compraEnCarrito[i].cantidad);
         $("#precioNutella").html(carrito2.compraEnCarrito[i].precio);
+        precioTotal = precioTotal + carrito2.compraEnCarrito[i].precio;
         
     }
 
@@ -109,7 +118,7 @@ for (var i = 0; i<carrito2.compraEnCarrito.length; i++){
 
 }
 /*Calculo del precio total a pagar, incluyendo el envio*/
-precioTotal = 80 + carrito2.compraEnCarrito[0].precio + carrito2.compraEnCarrito[1].precio + carrito2.compraEnCarrito[2].precio + carrito2.compraEnCarrito[3].precio;
+//precioTotal = 80 + carrito2.compraEnCarrito[0].precio + carrito2.compraEnCarrito[1].precio + carrito2.compraEnCarrito[2].precio + carrito2.compraEnCarrito[3].precio;
 
 /*Inicio Carga del total en carrito.html*/
 var total = document.getElementById("total");
