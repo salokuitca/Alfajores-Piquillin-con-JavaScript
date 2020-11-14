@@ -1,0 +1,236 @@
+@import 'colors';
+@import 'animation-mixin';
+@import 'fonts';
+@import 'tabla-y-formulario-extends';
+@import 'medias-queries-mixin';
+
+/* Inicialización de mi CSS*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Estilos generales en etiqueta html*/
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden !important;
+}
+
+/*Estilos clase .body que se corresponde con la etiqueta body*/
+.body {
+    background-color: $background-color-body;
+    font-family: $body-font-family;
+    overflow-x: hidden !important;
+}
+
+/* Aumento de segundos en animate on scroll del modal promo */
+.body [data-aos-delay='5000'] [data-aos],
+[data-aos][data-aos][data-aos-delay='5000'] {
+    transition-delay: 5000ms;
+}
+
+/*Estilos del header*/
+.header-container {
+    .banner {
+        background-image: url("../images/00banner.jpg");
+        height: calc(100vh - 70px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        width: 100%;
+        margin-top: 70px;
+    }
+
+}
+
+/*Estilo logo*/
+.logo {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
+    opacity: 0.5;
+    @include animation ();
+}
+
+/*Estilos menu*/
+.imagen-menu {
+    width: 45px;
+    height: 45px;
+}
+
+/*Estilos del párrafo descriptivo*/
+.descripcion-general {
+    margin: 6vw;
+
+    .nombre {
+        margin: 10px;
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: $font-weight-h1;
+        font-size: $font-size-h1;
+    }
+
+    .introduccion {
+        position: relative;
+        margin: 0 auto;
+        max-width: 600px;
+        text-align: center;
+    }
+}
+
+/*Estilo de h2*/
+h2 {
+    padding-top: 80px;
+    padding-bottom: 20px;
+    color: $color-h2;
+}
+
+/*Inicio estilos sección Productos (main)*/
+.producto {
+    max-width: 400px;
+}
+
+.imagen-card {
+    height: auto;
+}
+
+.subseccion-productos {
+    padding: 10px 0 5px 0;
+    margin-top: 30px !important;
+    text-align: center;
+}
+
+.imagenes-presentaciones {
+    img {
+        margin: 30px;
+        max-width: 90%;
+        box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.5);
+    }
+}
+
+/*Fin estilos sección Productos*/
+
+
+/*Inicio Estilos sección precios*/
+
+/*Estilos tabla*/
+.tabla-precios {
+    .tabla {
+        border-collapse: collapse;
+        border-radius: 5px 5px 00;
+        overflow: hidden;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+        tr {
+            border-bottom: 1px solid $tr-border-bottom;
+
+            &:nth-child(even) {
+                background-color: $background-color-tabla-child;
+            }
+
+            &:last-of-type {
+                border-bottom: 2px solid $tr-border-bottom-last-of-type;
+            }
+
+            th {
+                background-color: $background-color-th;
+                @extend %estilos-tabla;
+            }
+
+            td {
+                @extend %estilos-tabla;
+            }
+        }
+    }
+}
+
+/*Fin Estilos sección precios*/
+
+/*Estilos de promo modal*/
+.piquibola {
+    width: 100%;
+}
+
+/*Inicio estilos sección envíos*/
+.pin {
+    width: 20px;
+}
+
+/*Fin estilos sección envíos*/
+
+/*Inicio estilos sección Pedido*/
+.formulario {
+    max-width: 700px !important;
+    background-color: $background-color-formulario;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 0 0;
+
+    .lugares {
+        padding-left: 62px;
+    }
+}
+
+/*Fin estilos sección pedidos*/
+
+/*Inicio estilos sección contacto*/
+.social {
+
+    @include transition-hover-social ();
+}
+
+.social:hover {
+
+    @include tansform-hover-social ();
+    filter: opacity(90%);
+    margin: 0 10px;
+
+}
+
+.imagen-contacto {
+    width: 200px;
+    padding: 20px;
+}
+
+/*Fin estilos sección contacto*/
+
+/*Estilos del footer*/
+footer {
+    height: 30px;
+    background-color: $background-color-menu;
+
+    a {
+        img {
+            height: 20px;
+        }
+    }
+}
+
+/* Animacion Titulo */
+
+@include keyframes ();
+
+/* Inicio Medias Queries */
+
+/* Mobile Style */
+
+@include mobile ();
+
+/* Tablet Style */
+
+@include tablet ();
+
+/* Desktop Style */
+
+@include desktop ();
+
+/* Fin Medias Queries */
