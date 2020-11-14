@@ -25,6 +25,14 @@
 
     <!-- Fuentes a usar -->
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+    <!-- CDN jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <!-- Vinculacion con mis archivos js -->
+    <script defer src="Producto.js"></script>
+    <script defer src="CarritoDeCompras.js"></script>
+    <script defer src="script.js"></script>
 </head>
 
 <body class="body">
@@ -92,26 +100,47 @@
         <h2 class="d-flex justify-content-center">Productos</h2>
         <div class="container d-flex flex-wrap justify-content-around">
             <div class="card mb-4 producto">
-                <div class=""><img src="images/Dulce de leche.jpeg" srcset="images/Dulce de leche.jpeg"
+                <div class=""><img src="images/Dulce de leche.jpeg" 
                         alt="Alfajor de dulce de leche" title="Alfajor-dulce-de-leche" class="card-img-top imagen-card">
                 </div>
                 <div class="align-items-center card-body">
                     <p class="card-text text-center">Mini Alfajor de Dulce de leche (~ 30g) ideal para ese bocadito
                         que necesitas sin sentirte culpable </p>
                 </div>
+                <div class="btn-toolbar d-flex justify-content-between p-3">
+                    <div class="btn-group btn-group-toggle">
+                        <input type="button" class="btn btn-secondary restar" value="-">
+                        <input type="number" class="cantidad-carrito btn btn-secondary" id="DDL" value="0" disabled>
+                        <input type="button" class="btn btn-secondary sumar" value="+">
+                        
+                    </div>
+                    <div>
+                        <button onclick="anotarCompra()" type="button" class="btn btn-group btn-dark">Agregar al Carrito</button>
+                    </div>
+                </div>
             </div>
 
             <div class="card mb-4 producto">
-                <div class=""><img src="images/Nuez.jpeg" srcset="images/Nuez.jpeg" alt="Alfajor con nuez"
+                <div class=""><img src="images/Nuez.jpeg"  alt="Alfajor con nuez"
                         title="Alfajor-con-nuez" class="card-img-top imagen-card">
                 </div>
                 <div class="align-items-center card-body">
                     <p class="card-text text-center">Mini Alfajor de Dulce de Leche con nuez</p>
                 </div>
+                <div class="btn-toolbar d-flex justify-content-between p-3">
+                    <div class="btn-group btn-group-toggle">
+                        <input type="button" class="btn btn-secondary restar" value="-">
+                        <input type="number" class="cantidad-carrito btn btn-secondary" id="NUEZ" value="0" disabled>
+                        <input type="button" class="btn btn-secondary sumar" value="+">
+                    </div>
+                    <div>
+                        <button onclick="anotarCompra()" type="button" class="btn btn-group btn-dark">Agregar al Carrito</button>
+                    </div>
+                </div>
             </div>
 
             <div class="card mb-4 producto">
-                <div class=""><img src="images/marroc.jpg" srcset="images/marroc.jpg"
+                <div class=""><img src="images/marroc.jpg" 
                         alt="Bombones tipo marroc en distintas formas" title="Bombones-tipo-marroc"
                         class="card-img-top imagen-card">
                 </div>
@@ -119,17 +148,41 @@
                     <p class="card-text text-center ">Bombón tipo "Marroc" con dos capas de chocolate con leche y
                         una de maní</p>
                 </div>
+                <div class="btn-toolbar d-flex justify-content-between p-3">
+                    <div class="btn-group btn-group-toggle">.
+                        <input type="button" class="btn btn-secondary restar" value="-">
+                        <input type="number" class="cantidad-carrito btn btn-secondary" id="MARROC" value="0" disabled>
+                        <input type="button" class="btn btn-secondary sumar" value="+">
+                        
+                    </div>
+                    <div>
+                        <button onclick="anotarCompra()" type="button" class="btn btn-group btn-dark" >Agregar al Carrito</button>
+                    </div>
+                </div>
             </div>
 
             <div class="card mb-4 producto">
-                <div class=""><img src="images/nutella.jpg" srcset="images/nutella.jpg"
+                <div class=""><img src="images/nutella.jpg" 
                         alt="Bombones tipo nutella en distintas formas" title="Bombones-tipo-nutella"
                         class="card-img-top imagen-card">
                 </div>
                 <div class="align-items-center card-body">
                     <p class="card-text text-center">Bombón de Nutella</p>
                 </div>
+                <div class="btn-toolbar d-flex justify-content-between p-3">
+                    <div class="btn-group btn-group-toggle">
+                        <input type="button" class="btn btn-secondary restar" value="-">
+                        <input type="number" class="cantidad-carrito btn btn-secondary" id="NUTELLA" value="0" disabled>
+                        <input type="button" class="btn btn-secondary sumar" value="+">
+                    </div>
+                    <div>
+                        <button onclick="anotarCompra()" type="button" class="btn btn-group btn-dark">Agregar al Carrito</button>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="carrito.html"><button onclick="armarCarrito()" class="btn btn-primary mx-3">Carrito</button></a>
         </div>
         <!-- Inicio parte de Presentaciones -->
         <h4 class="subseccion-productos">Presentaciones</h4>
@@ -415,7 +468,8 @@
         AOS.init();
     </script>
     <!-- JQuery para ocultar el desplegable del navbar al hacer click -->
-    <script defer src="script.js"></script>
+    <script defer src="collapse+modal.js"></script>
+    
 </body>
 
 </html>

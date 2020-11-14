@@ -94,6 +94,9 @@ h2 {
 .producto {
   max-width: 400px;
 }
+.producto .cantidad-carrito {
+  width: 40px;
+}
 
 .imagen-card {
   height: auto;
