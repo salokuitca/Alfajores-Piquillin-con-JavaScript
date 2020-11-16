@@ -9,6 +9,7 @@ class CarritoDeCompras {
         /*Inicio Funcion AgregarAlCarrito*/
         this.agregarAlCarrito = (compraEnCarrito) => {
             this.compraEnCarrito.push(compraEnCarrito);
+           
 
             /*Guardar el carrito en local storage*/
             localStorage.setItem (('carrito'), JSON.stringify (prueba));

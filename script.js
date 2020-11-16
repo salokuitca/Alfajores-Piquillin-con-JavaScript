@@ -54,25 +54,25 @@ function anotarCompra() {
         case 0:
             if (ddlCantidad != 0) {
             prueba.agregarAlCarrito(pruebaDdl);
-            $("#DDL").val(0);
+            //$("#DDL").val(0);
             }
         break;
         case 1:
             if (nuezCantidad != 0) {
             prueba.agregarAlCarrito(pruebaNuez);
-            $("#NUEZ").val(0);
+            //$("#NUEZ").val(0);
             }
         break;
         case 2:
             if (marrocCantidad != 0) {
             prueba.agregarAlCarrito(pruebaMarroc);
-            $("#MARROC").val(0);
+            //$("#MARROC").val(0);
             }
         break;
         case 3:
             if (nutellaCantidad != 0) {
             prueba.agregarAlCarrito(pruebaNutella);
-            $("#NUTELLA").val(0);
+            //$("#NUTELLA").val(0);
             }
         break;
         }
