@@ -17,6 +17,9 @@ var bombonNutella = new Producto ("N", 35, 100);
 
 /* Creacion de carrito*/
 var prueba = new CarritoDeCompras();
+/*Comprobar si hay algo en el Local Storage*/
+prueba.comprobarLocalStorage();
+
 
 /*Boton para sumar o restar cantidad de producto para agregar al carrito*/
 $(document).on('click', '.sumar', function () {
