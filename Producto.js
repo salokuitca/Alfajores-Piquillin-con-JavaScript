@@ -16,54 +16,21 @@ class Producto {
 /*Fin Declaracion del Objeto Producto*/
 
 
-function getProductos() {
-	var productosComoObjetos = JSON.parse(Productos_Desde_BaseDeDatos);
+var productos = [];
+/*Lectura de los productos desde productos.json con ajax*/
+$.ajax('productos.json').done(function (data) {
+   
+  productos = data
+  console.log (productos)
+  // productos.forEach(function (producto) {
+  var productos2 = productos.map(
+     		(value) => new Producto (value.id, value.nombre, value.precio, value.imagen, value.descripcion, value.cantidadUsuario, value.stock)
+     	);
+//  })
+  productos = productos2;
+  console.log(productos)
 
-	var productos = productosComoObjetos.map(
-		(value) => new Producto (value.id, value.nombre, value.precio, value.imagen, value.descripcion, value.cantidadUsuario, value.stock)
-	);
-
-	return productos;
-}
-
-
-const Productos_Desde_BaseDeDatos = `[{
-    "id": "D",
-    "nombre": "Alfajor de Dulce de Leche",
-    "precio": 50,
-    "imagen": "images/Dulce de leche.jpeg",
-    "descripcion": "Mini Alfajor de Dulce de leche (~ 30g) ideal para ese bocadito que necesitas sin sentirte culpable",
-    "cantidadUsuario": 0,
-    "stock": 100
-  }, {
-    "id": "Z",
-    "nombre": "Alfajor con Nuez",
-    "precio": 60,
-    "imagen": "images/Nuez.jpeg",
-    "descripcion": "Mini Alfajor de Dulce de Leche con nuez",
-    "cantidadUsuario": 0,
-    "stock": 100
-  }, {
-    "id": "M",
-    "nombre": "Bombón tipo Marroc",
-    "precio": 30,
-    "imagen": "images/marroc.jpg",
-    "descripcion": "Bombón tipo Marroc con dos capas de chocolate con leche y una de maní",
-    "cantidadUsuario": 0,
-    "stock": 100
-  }, {
-    "id": "N",
-    "nombre": "Bombón con Nutella",
-    "precio": 35,
-    "imagen": "images/nutella.jpg",
-    "descripcion": "Exquisito Bombón de chocolate relleno con Nutella",
-    "cantidadUsuario": 0,
-    "stock": 100
-  }]`;
-
-  var productos = getProductos();
-
-productos.forEach((producto) => {
+  productos.forEach((producto) => {
     var cardProductos = crearCardProductos(producto);
     contenedorCards.appendChild(cardProductos);
 })
@@ -142,3 +109,26 @@ function crearCardProductos (producto) {
 }
 
 /*Fin Función para crear la card de cada producto*/
+
+
+/*Función para indicar que se agregó el pedido al carrito*/
+$('.agregar').click(function (){
+   var $this = $(this);
+   var textoOriginal = $this.text();
+
+   $this.text('Agregado');
+   $this.removeClass('btn-dark');
+
+   setTimeout(function () {
+       $this.text(textoOriginal);
+       $this.addClass('btn-dark');
+   }, 1000);
+});
+
+ 
+ })
+
+
+
+  
+
