@@ -2,19 +2,31 @@
 //Cada producto se vende solo en las cantidades determinadas: 6, 12 o 24
 class Producto {
 
-    constructor(id, nombre, precio, imagen, descripcion, cantidadUsuario, stock) {
+    constructor(id, nombre, precio, imagen, descripcion, cantidadUsuario, stock, selector) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.cantidadUsuario = cantidadUsuario;
-        this.stock = stock;
+        this.stock = stock
+        
         
     }
 }
 /*Fin Declaracion del Objeto Producto*/
-
+function badgeCarrito (carrito) {
+  if (carrito.length){
+  var carritoMenu = document.getElementById("cantidadCarrito");
+      cantidadCarrito = 0;
+      carrito.forEach((producto) => {
+        cantidadCarrito = cantidadCarrito + parseInt(producto.cantidadUsuario);
+    })
+      carritoMenu.innerHTML = cantidadCarrito;
+    } else {
+      carritoMenu.innerHTML = ""
+    }
+}
 
 var productos = [];
 /*Lectura de los productos desde productos.json con ajax*/
@@ -27,6 +39,7 @@ $.ajax('productos.json').done(function (data) {
      		(value) => new Producto (value.id, value.nombre, value.precio, value.imagen, value.descripcion, value.cantidadUsuario, value.stock)
      	);
 //  })
+
   productos = productos2;
   console.log(productos)
 
@@ -34,8 +47,22 @@ $.ajax('productos.json').done(function (data) {
     var cardProductos = crearCardProductos(producto);
     contenedorCards.appendChild(cardProductos);
 })
+/*Función para indicar que se agregó el pedido al carrito*/
+$('.agregar').click(function (){
+  var $this = $(this);
+  var textoOriginal = $this.text();
+
+  $this.text('Agregado');
+  $this.removeClass('btn-dark');
+
+  setTimeout(function () {
+      $this.text(textoOriginal);
+      $this.addClass('btn-dark');
+  }, 1000);
+});
 
 /*Inicio Función para crear la card de cada producto*/
+badgeCarrito(carrito);
 function crearCardProductos (producto) {
   var cardProducto = document.createElement ("div");
   cardProducto.id = producto.id;
@@ -43,7 +70,7 @@ function crearCardProductos (producto) {
 
   var elementosHTML = ` 
   <div> 
-      <img src='${producto.imagen}' alt="Alfajor de dulce de leche" title="Alfajor-dulce-de-leche" class="card-img-top imagen-card">
+      <img src='${producto.imagen}' alt='${producto.nombre}' title='${producto.nombre}' class="card-img-top imagen-card">
   </div>
   <div class="align-items-center card-body">
       <p class="card-text text-center">${[producto.descripcion]}</p>
@@ -86,12 +113,39 @@ function crearCardProductos (producto) {
   buttonCarrito.classList = "btn btn-group btn-dark btn-success agregar";
   buttonCarrito.innerHTML = "Agregar al Carrito"
 
+  if (input.value ==0) {
+    buttonCarrito.setAttribute('disabled','disabled');
+  }  
+  
+  inputMas.addEventListener ("click", () => {
+    buttonCarrito.removeAttribute('disabled')
+  })
+
+  inputMenos.addEventListener ("click", () => {
+    if (input.value == 6)
+    buttonCarrito.setAttribute('disabled','disabled');
+  })
+
   buttonCarrito.addEventListener("click", () => {
-      
+      var pruebaDeId = producto.id;     
       producto.cantidadUsuario = input.value;
-      carrito.push(producto);
-      localStorage.setItem (('carrito'), JSON.stringify (carrito))
+      var verificar = false;
+      carrito.forEach((producto) => {
+        if ( pruebaDeId == producto.id){
+          cantidadNueva = parseInt(producto.cantidadUsuario) + parseInt(input.value);
+          producto.cantidadUsuario = cantidadNueva;
+          verificar = true;
+
+        } 
+      })
       
+      if (verificar == false) {
+       carrito.push(producto); 
+      }
+      
+      localStorage.setItem (('carrito'), JSON.stringify (carrito));
+      badgeCarrito(carrito);
+    
 });
 
   cardProducto.appendChild(divContenedorBotones);
@@ -111,19 +165,7 @@ function crearCardProductos (producto) {
 /*Fin Función para crear la card de cada producto*/
 
 
-/*Función para indicar que se agregó el pedido al carrito*/
-$('.agregar').click(function (){
-   var $this = $(this);
-   var textoOriginal = $this.text();
 
-   $this.text('Agregado');
-   $this.removeClass('btn-dark');
-
-   setTimeout(function () {
-       $this.text(textoOriginal);
-       $this.addClass('btn-dark');
-   }, 1000);
-});
 
  
  })

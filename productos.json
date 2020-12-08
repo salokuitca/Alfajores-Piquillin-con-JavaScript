@@ -6,6 +6,7 @@
     "descripcion": "Mini Alfajor de Dulce de leche (~ 30g) ideal para ese bocadito que necesitas sin sentirte culpable",
     "cantidadUsuario": 0,
     "stock": 100
+    
   }, {
     "id": "Z",
     "nombre": "Alfajor con Nuez",
@@ -14,6 +15,7 @@
     "descripcion": "Mini Alfajor de Dulce de Leche con nuez",
     "cantidadUsuario": 0,
     "stock": 100
+    
   }, {
     "id": "M",
     "nombre": "Bombón tipo Marroc",
@@ -22,6 +24,7 @@
     "descripcion": "Bombón tipo Marroc con dos capas de chocolate con leche y una de maní",
     "cantidadUsuario": 0,
     "stock": 100
+    
   }, {
     "id": "N",
     "nombre": "Bombón con Nutella",
@@ -30,4 +33,5 @@
     "descripcion": "Exquisito Bombón de chocolate relleno con Nutella",
     "cantidadUsuario": 0,
     "stock": 100
+    
   }]

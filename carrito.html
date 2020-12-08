@@ -21,66 +21,114 @@
     
 </head>
 <body class="body">
-    <div class="container mb-4">
-        <div class="row">
-            <div class="col-12">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col"> </th>
-                                <th scope="col">Producto</th>
-                                <th scope="col">Disponibilidad</th>
-                                <th scope="col" class="text-center">Cantidad</th>
-                                <th scope="col" class="text-right">Precio</th>
-                                <th> </th>
-                            </tr>
-                        </thead>
-                        <tbody id="contenedorTr">
-                            <!-- ACA VA CADA PRODUCTO EN EL CARRITO HECHO CON JS -->
-                        </tbody>
-                        <tr>
-                            <td>Seleccione Lugar de Envío</td>
-                            <td>
-                                <select name="" id="lugarDeEnvio" onchange="elegirEnvio()">
-                                    <option value="" id="VGB">Elegir</option>
-                                    <option value="80" id="VGB">Villa General Belgrano</option>
-                                    <option value="50" id="VR">Villa Rumipal</option>
-                                    <option value="70" id="SRC">Santa Rosa de Calamuchita</option>
-                                    <option value="60" id="VDD">Villa del Dique</option>
-                                </select>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td>Envío</td>
-                            <td class="text-right" id="precioEnvio"></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Total</strong></td>
-                            <td class="text-right" id="total"><strong></strong></td>
-                        </tr>
-                    </table>
-                </div>
+
+    <!-- Inicio Menu -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <img src="images/logosolo.svg" alt="Logo con la imagen de un árbol" title="logo-piquillin-menu"
+                    class="imagen-menu">
+                Tu Carrito
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSuportedContent"
+                aria-controls="navbarSuportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSuportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#productos">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#precios">Precios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#pedido">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#envios">Envíos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contacto">Contacto</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col mb-2">
-                <div class="row">
-                    <div class="col-sm-12  col-md-6">
-                        
-                        <a href="index.html" class="text-decoration-none"><button class="btn btn-block btn-light">Continuar Comprando</button></a>
-                    </div>
-                    <div class="col-sm-12 col-md-6 text-right">
-                        <button class="btn btn-lg btn-block btn-success text-uppercase">Pagar</button>
-                    </div>
+            <div class="cart-div">
+                <a href="carrito.html"><img src="images/cart.svg" class="cart" alt=""></a>
+                <span class="badge badge-pill badge-dark" id="cantidadCarrito2"></span>
+            </div>
+
+            </div>
+        </div>
+    </nav>
+    <!-- Fin Menu -->
+    <div id= "carritoVacio">
+        <!-- ACA VA CARRITO VACIO HECHO CON JS -->
+    </div>
+
+    <div class="container carrito-container" id="carritoID">
+        <div id="contenedorDivCarrito">
+            <!-- ACA VA CADA PRODUCTO EN EL CARRITO HECHO CON JS -->
+        </div>
+        <div class="barra my-3">
+            <div class="row border-bottom d-flex align-items-center mx-1 rounded-lg shadow-sm py-3 bg-light">
+                <div class="col-8 lugar-de-envio d-flex justify-content-around flex-wrap  ">
+                    <div class="pb-1"> Seleccione Lugar de Envío</div>
+                    <select name="" id="lugarDeEnvio" onchange="elegirEnvio()" class="rounded">
+                        <option value="0">Elegir</option>
+                        <option value="80" id="VGB">Villa Gral Belgrano</option>
+                        <option value="50" id="VR">Villa Rumipal</option>
+                        <option value="70" id="SRC">Sta Rosa Calamuchita</option>
+                        <option value="60" id="VDD">Villa del Dique</option>
+                    </select>
+                </div>
+                <div class="col-4 text-center">
+                    <strong>Total: </strong>
+                    <strong id="total"></strong>
                 </div>
             </div>
         </div>
+
+        <!-- FORMULARIO -->
+        <!-- <div class="barra my-3">
+            <div class="row border-bottom d-flex align-items-center mx-1 rounded-lg shadow-sm py-3 bg-light container">
+                <form action="">
+                    <div class="form-group">
+                        <label for="" class="py-2">Nombre</label>
+                        <input type="text" class="form-control">
+                        <label for="">Whatsapp</label>
+                        <input type="number" class="form-control">
+    
+    
+                    </div>
+
+                    <div class="form-group d-flex justify-content-center">
+                        <label for="FechaEnvio" class="pr-3">Fecha de Envio preferida</label>
+                        <input type="date" id="FechaEnvio" name="fechaEnvioName" min="2020-11-20" max="2020-11-30">
+                    </div>    
+                    <div class="form-group">
+                        <label for="">Dirección de entrega</label>
+                        <textarea name="" id="descripcion-dire" value="" cols="30" rows="10"
+                            class="form-control"></textarea>
+                    </div>
+                    
+                </form>
+            </div>
+        </div> -->
+
+        <div class="row ">
+            <div class="col-sm-12  col-md-6 ">
+                <a href="index.html" class="text-decoration-none ">
+                    <button class="btn btn-lg btn-block btn-light shadow-sm rounded-pill m-2">Continuar
+                        Comprando</button>
+                </a>
+            </div>
+            <div class="col-sm-12 col-md-6 text-right">
+                <button
+                    class="btn btn-lg btn-block btn-warning text-uppercase shadow-sm rounded-pill pagar m-2">Pagar</button>
+            </div>
+        </div>
     </div>
-    
-    
 
     <!-- Vinculacion con mis archivos js -->
     <script src="Producto.js"></script>

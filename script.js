@@ -37,45 +37,85 @@ $(document).on('click', '.restar', function () {
      if ($(this).next().val() > 0) $(this).next().val(+$(this).next().val()-6);
  });
 
+function carritoVacio() {
+    $('#carritoID').hide();
+    var elementosHTML = `
+    <div class="container carrito-vacio">
+        <div class="d-flex justify-content-center align-items-center"> Oh no! :( Tu carrito está vacío! </div>
+        <div class="d-flex justify-content-center align-items-center">
+        <img src="images/cartEmpty.png" alt="">
+        </div>
+        <a href="index.html" class="text-decoration-none d-flex justify-content-center align-items-center">
+                    <button class="btn btn-lg btn-block btn-warning shadow-sm rounded-pill m-2 col-3 ">Continuar
+                        Comprando</button>
+                </a>
+    </div> 
+    `
+    var carritoVacio = document.getElementById("carritoVacio");
+    carritoVacio.innerHTML= elementosHTML;
+    
+
+}
+if (carrito == "") {
+    carritoVacio();
+}
+
 
 /*Inicio Creación y carga de productos en carrito*/
-    var precioTotal = 0;
+     var precioTotal = 0;
     carrito.forEach((producto) => {
      var lineaCarrito = crearLineaCarrito(producto);
-     contenedorTr.appendChild(lineaCarrito);
-     precioTotal = precioTotal +(producto.cantidadUsuario * producto.precio)
-     console.log (precioTotal);
-     var total = document.getElementById("total");
-     total.innerHTML = precioTotal + " $";
+     contenedorDivCarrito.appendChild(lineaCarrito);
  })
+/*Llamado a función para calcular el precio total*/
+ precioAPagar(carrito);
 
+/*Función que calcula el precio total*/
+function precioAPagar(carrito) {
+    
+    carrito.forEach((producto) => {
+        precioTotal = precioTotal +(producto.cantidadUsuario * producto.precio)
+         console.log (precioTotal);
+         var total = document.getElementById("total");
+         total.innerHTML = precioTotal + " $";
+    })
+    
+}
+
+ /*Función para crear cada línea con el producto elegido en el carrito*/
  
  function crearLineaCarrito (producto) {
-     var lineaCarrito = document.createElement ("tr");
+    
+     var lineaCarrito = document.createElement ("div");
+     lineaCarrito.classList = "row border-bottom d-flex align-items-center py-2 mx-1 rounded-lg shadow-sm";
 
      var elementosHTML = `
-     <td><img src='${producto.imagen}' width="50px" /> </td>
-     <td>${[producto.nombre]}</td>
-     <td>En stock</td>
-     <td class="text-right">${[producto.cantidadUsuario]}</td>
-     <td class="text-right">${[producto.cantidadUsuario] * [producto.precio]}</td>
+     
+                <div class="col-3"><img src='${producto.imagen}' class=" img-pdto-encarrito img-fluid"></div>
+                <div class="col-7 d-flex justify-content-around flex-wrap">
+                    <div class="col-sm descripcion-pdto-encarrito">${[producto.nombre]}</div>
+                    <div class="col-sm">
+                        <div class="row d-flex justify-content-around">
+                            <div>${[producto.cantidadUsuario]} u</div>
+                            <div>$ ${[producto.cantidadUsuario] * [producto.precio]}</div>
+                        </div>
+                    </div>
+                </div>
      `
-     lineaCarrito.innerHTML = elementosHTML;
-
-     var tdButton = document.createElement("td");
-     tdButton.classList = "text-right";
+      lineaCarrito.innerHTML = elementosHTML; 
+    
+    var divEliminar = document.createElement("div");
+    divEliminar.classList = "col-2";
 
     var buttonEliminar = document.createElement ("button");
-    buttonEliminar.classList = "btn btn-sm btn-danger eliminar"
+    buttonEliminar.classList = "btn btn-danger btn-sm";
     buttonEliminar.id = producto.id;
-    buttonEliminar.innerHTML = "Eliminar"
+    buttonEliminar.innerHTML = "✖";
+ 
+    lineaCarrito.appendChild(divEliminar);
+    divEliminar.appendChild(buttonEliminar);
 
-    
-
-    lineaCarrito.appendChild(tdButton);
-    tdButton.appendChild(buttonEliminar);
-
-    
+    /*Evento para eliminar items del carrito*/
      buttonEliminar.addEventListener("click", () => {
         carrito = carrito.filter(function (product) { return product.id != $(event.target).attr('id')})
         
@@ -88,29 +128,39 @@ $(document).on('click', '.restar', function () {
         } else {
             localStorage.removeItem('carrito')
             lineaCarrito.remove()
+            carritoVacio();
         }
         precioTotal = 0;
-        carrito.forEach((producto) => {
             if (carrito.length) {
-            precioTotal = precioTotal + (producto.cantidadUsuario * producto.precio)
-            console.log (precioTotal);
-            var total = document.getElementById("total");
-            total.innerHTML = precioTotal + " $";
-            } else{
+                precioAPagar(carrito); 
+                elegirEnvio();
+            } else {
                 var total = document.getElementById("total");
                 total.innerHTML = "";
-            }
-        })
-       
-        
+            }  
+            
+            
    });
 
+   
 
+   $(document).on('click', '.sumar2', function () {
+    producto.cantidadUsuario = $(this).prev().val()
+     console.log (producto.cantidadUsuario);
+    var hola = document.getElementById(producto.selector)
+    hola.innerHTML = producto.cantidadUsuario * producto.precio;
+    });
+
+  
      return lineaCarrito;
     
 }
 /*Fin Creación y carga de productos en carrito*/
 
+$(document).on('click', '.sumarTotal', function () {
+    
+    precioAPagar(carrito)
+    });
 /*Función para elegir el Envio y sumar su precio*/
 function elegirEnvio(){
 
@@ -118,6 +168,3 @@ function elegirEnvio(){
          var total = document.getElementById("total");
          total.innerHTML = precioTotal + parseInt($( "#lugarDeEnvio option:selected" ).val()) + " $";
      }
-
- 
-

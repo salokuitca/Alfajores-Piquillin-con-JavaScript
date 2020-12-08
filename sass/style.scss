@@ -66,6 +66,18 @@ html {
     height: 45px;
 }
 
+.cart {
+    width: 40px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+
+.cart-div:hover {
+    transform: scale(1.15);
+    filter: opacity(0.8);;
+}
+
 /*Estilos del párrafo descriptivo*/
 .descripcion-general {
     margin: 6vw;
@@ -210,6 +222,7 @@ h2 {
 footer {
     height: 30px;
     background-color: $background-color-menu;
+    
 
     a {
         img {
@@ -217,6 +230,20 @@ footer {
         }
     }
 }
+
+/*Estilos de carrito.html*/
+.carrito-container, .carrito-vacio {
+    margin-top: 100px;
+}
+
+.carrito-vacio div {
+    font-size: $font-size-h1;
+}
+.carrito-vacio img {
+     width: 50%;
+}
+
+
 
 /* Animacion Titulo */
 

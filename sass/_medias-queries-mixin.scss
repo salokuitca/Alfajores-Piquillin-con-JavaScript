@@ -27,6 +27,15 @@
             }
         }
 
+        /*Estilos mobile de carrito.html*/
+        .descripcion-pdto-encarrito, .lugar-de-envio {
+            font-size: $font-size-mobile;
+        }
+
+        .descripcion-pdto-encarrito {
+            font-weight: bold;
+        }
+
     }
 }
 
@@ -35,6 +44,10 @@
         /*Estilo tablet Sección Producto*/
         .descripcion-caja {
             max-width: 30% !important;
+        }
+
+        .descripcion-pdto-encarrito {
+            font-weight: bold;
         }
     }
 }
@@ -75,6 +88,11 @@
         /*Estilos desktop Sección Contacto*/
         .datos-contacto {
             max-width: 800px;
+        }
+
+        /*Estilos desktop de carrito.html*/
+        .img-pdto-encarrito {
+            max-width: 10rem !important;
         }
     }
 }
