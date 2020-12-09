@@ -2,43 +2,43 @@
 //Cada producto se vende solo en las cantidades determinadas: 6, 12 o 24
 class Producto {
 
-    constructor(id, nombre, precio, imagen, descripcion, cantidadUsuario, stock, selector) {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.imagen = imagen;
-        this.descripcion = descripcion;
-        this.cantidadUsuario = cantidadUsuario;
-        this.stock = stock
-        
-        
-    }
+  constructor(id, nombre, precio, imagen, descripcion, cantidadUsuario, stock, selector) {
+    this.id = id;
+    this.nombre = nombre;
+    this.precio = precio;
+    this.imagen = imagen;
+    this.descripcion = descripcion;
+    this.cantidadUsuario = cantidadUsuario;
+    this.stock = stock
+
+
+  }
 }
 /*Fin Declaracion del Objeto Producto*/
-function badgeCarrito (carrito) {
-  if (carrito.length){
-  var carritoMenu = document.getElementById("cantidadCarrito");
-      cantidadCarrito = 0;
-      carrito.forEach((producto) => {
-        cantidadCarrito = cantidadCarrito + parseInt(producto.cantidadUsuario);
+function badgeCarrito(carrito) {
+  if (carrito.length) {
+    var carritoMenu = document.getElementById("cantidadCarrito");
+    cantidadCarrito = 0;
+    carrito.forEach((producto) => {
+      cantidadCarrito = cantidadCarrito + parseInt(producto.cantidadUsuario);
     })
-      carritoMenu.innerHTML = cantidadCarrito;
-    } else {
-      carritoMenu.innerHTML = ""
-    }
+    carritoMenu.innerHTML = cantidadCarrito;
+  } else {
+    carritoMenu.innerHTML = ""
+  }
 }
 
 var productos = [];
 /*Lectura de los productos desde productos.json con ajax*/
 $.ajax('productos.json').done(function (data) {
-   
+
   productos = data
-  console.log (productos)
+  console.log(productos)
   // productos.forEach(function (producto) {
   var productos2 = productos.map(
-     		(value) => new Producto (value.id, value.nombre, value.precio, value.imagen, value.descripcion, value.cantidadUsuario, value.stock)
-     	);
-//  })
+    (value) => new Producto(value.id, value.nombre, value.precio, value.imagen, value.descripcion, value.cantidadUsuario, value.stock)
+  );
+  //  })
 
   productos = productos2;
   console.log(productos)
@@ -46,29 +46,30 @@ $.ajax('productos.json').done(function (data) {
   productos.forEach((producto) => {
     var cardProductos = crearCardProductos(producto);
     contenedorCards.appendChild(cardProductos);
-})
-/*Función para indicar que se agregó el pedido al carrito*/
-$('.agregar').click(function (){
-  var $this = $(this);
-  var textoOriginal = $this.text();
+  })
+  /*Función para indicar que se agregó el pedido al carrito*/
+  $('.agregar').click(function () {
+    var $this = $(this);
+    var textoOriginal = $this.text();
 
-  $this.text('Agregado');
-  $this.removeClass('btn-dark');
+    $this.text('Agregado');
+    $this.removeClass('btn-dark');
 
-  setTimeout(function () {
+    setTimeout(function () {
       $this.text(textoOriginal);
       $this.addClass('btn-dark');
-  }, 1000);
-});
+    }, 1000);
+  });
 
-/*Inicio Función para crear la card de cada producto*/
-badgeCarrito(carrito);
-function crearCardProductos (producto) {
-  var cardProducto = document.createElement ("div");
-  cardProducto.id = producto.id;
-  cardProducto.classList = "card mb-4 producto";
+  /*Inicio Función para crear la card de cada producto*/
+  badgeCarrito(carrito);
 
-  var elementosHTML = ` 
+  function crearCardProductos(producto) {
+    var cardProducto = document.createElement("div");
+    cardProducto.id = producto.id;
+    cardProducto.classList = "card mb-4 producto";
+
+    var elementosHTML = ` 
   <div> 
       <img src='${producto.imagen}' alt='${producto.nombre}' title='${producto.nombre}' class="card-img-top imagen-card">
   </div>
@@ -76,101 +77,100 @@ function crearCardProductos (producto) {
       <p class="card-text text-center">${[producto.descripcion]}</p>
   </div>
   `
-  cardProducto.innerHTML = elementosHTML;
+    cardProducto.innerHTML = elementosHTML;
 
 
-  var divContenedorBotones = document.createElement ("div");
-  divContenedorBotones.classList = "btn-toolbar d-flex justify-content-between p-3";
+    var divContenedorBotones = document.createElement("div");
+    divContenedorBotones.classList = "btn-toolbar d-flex justify-content-between p-3";
 
-  var divContenedorSumayResta = document.createElement ("div");
-  divContenedorSumayResta.classList = "btn-group btn-group-toggle";
+    var divContenedorSumayResta = document.createElement("div");
+    divContenedorSumayResta.classList = "btn-group btn-group-toggle";
 
-  var inputMenos = document.createElement("input");
-  inputMenos.type = "button";
-  inputMenos.value = "-";
-  inputMenos.classList = "btn btn-secondary restar"
-  inputMenos.innerHTML = "";
+    var inputMenos = document.createElement("input");
+    inputMenos.type = "button";
+    inputMenos.value = "-";
+    inputMenos.classList = "btn btn-secondary restar"
+    inputMenos.innerHTML = "";
 
-  var input = document.createElement("input");
-  input.type = "number";
-  input.value = "0";
-  input.id = producto.id;
-  input.classList = "cantidad-carrito btn btn-secondary";
-  input.setAttribute('disabled','disabled');
-  input.innerHTML = "";
+    var input = document.createElement("input");
+    input.type = "number";
+    input.value = "0";
+    input.id = producto.id;
+    input.classList = "cantidad-carrito btn btn-secondary";
+    input.setAttribute('disabled', 'disabled');
+    input.innerHTML = "";
 
-  var inputMas = document.createElement("input");
-  inputMas.type = "button";
-  inputMas.value = "+";
-  inputMas.classList = "btn btn-secondary sumar"
-  inputMas.innerHTML = "";
+    var inputMas = document.createElement("input");
+    inputMas.type = "button";
+    inputMas.value = "+";
+    inputMas.classList = "btn btn-secondary sumar"
+    inputMas.innerHTML = "";
 
-  
-  var divAgregarCarrito = document.createElement("div");
-  
-  var buttonCarrito = document.createElement ("button");
-  buttonCarrito.type = "button";
-  buttonCarrito.classList = "btn btn-group btn-dark btn-success agregar";
-  buttonCarrito.innerHTML = "Agregar al Carrito"
 
-  if (input.value ==0) {
-    buttonCarrito.setAttribute('disabled','disabled');
-  }  
-  
-  inputMas.addEventListener ("click", () => {
-    buttonCarrito.removeAttribute('disabled')
-  })
+    var divAgregarCarrito = document.createElement("div");
 
-  inputMenos.addEventListener ("click", () => {
-    if (input.value == 6)
-    buttonCarrito.setAttribute('disabled','disabled');
-  })
+    var buttonCarrito = document.createElement("button");
+    buttonCarrito.type = "button";
+    buttonCarrito.classList = "btn btn-group btn-dark btn-success agregar";
+    buttonCarrito.innerHTML = "Agregar al Carrito"
 
-  buttonCarrito.addEventListener("click", () => {
-      var pruebaDeId = producto.id;     
+    if (input.value == 0) {
+      buttonCarrito.setAttribute('disabled', 'disabled');
+    }
+
+    inputMas.addEventListener("click", () => {
+      buttonCarrito.removeAttribute('disabled')
+    })
+
+    inputMenos.addEventListener("click", () => {
+      if (input.value == 6)
+        buttonCarrito.setAttribute('disabled', 'disabled');
+    })
+
+    buttonCarrito.addEventListener("click", () => {
+      var pruebaDeId = producto.id;
+      console.log(pruebaDeId)
       producto.cantidadUsuario = input.value;
+      console.log("antes for each" + producto.cantidadUsuario)
       var verificar = false;
       carrito.forEach((producto) => {
-        if ( pruebaDeId == producto.id){
+        if (pruebaDeId == producto.id) {
+          console.log("antes de sumar" + producto.cantidadUsuario)
           cantidadNueva = parseInt(producto.cantidadUsuario) + parseInt(input.value);
           producto.cantidadUsuario = cantidadNueva;
+          console.log("cantidad nueva" + cantidadNueva)
           verificar = true;
-
-        } 
+        }
       })
-      
+
       if (verificar == false) {
-       carrito.push(producto); 
+        carrito.push(producto);
       }
-      
-      localStorage.setItem (('carrito'), JSON.stringify (carrito));
+      input.value = 0
+      buttonCarrito.setAttribute('disabled', 'disabled');
+      localStorage.setItem(('carrito'), JSON.stringify(carrito));
       badgeCarrito(carrito);
-    
-});
 
-  cardProducto.appendChild(divContenedorBotones);
-  divContenedorBotones.appendChild (divContenedorSumayResta);
-  divContenedorSumayResta.appendChild(inputMenos);
-  divContenedorSumayResta.appendChild(input);
-  divContenedorSumayResta.appendChild(inputMas);
-  divContenedorBotones.appendChild(divAgregarCarrito);
-  divAgregarCarrito.appendChild(buttonCarrito);
+    });
 
-
-  
-
-  return cardProducto;
-}
-
-/*Fin Función para crear la card de cada producto*/
+    cardProducto.appendChild(divContenedorBotones);
+    divContenedorBotones.appendChild(divContenedorSumayResta);
+    divContenedorSumayResta.appendChild(inputMenos);
+    divContenedorSumayResta.appendChild(input);
+    divContenedorSumayResta.appendChild(inputMas);
+    divContenedorBotones.appendChild(divAgregarCarrito);
+    divAgregarCarrito.appendChild(buttonCarrito);
 
 
 
 
- 
- })
+    return cardProducto;
+  }
+
+  /*Fin Función para crear la card de cada producto*/
 
 
 
-  
 
+
+})

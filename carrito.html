@@ -43,9 +43,6 @@
                         <a class="nav-link" href="index.html#precios">Precios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html#pedido">Pedidos</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="index.html#envios">Envíos</a>
                     </li>
                     <li class="nav-item">
@@ -66,6 +63,11 @@
         <!-- ACA VA CARRITO VACIO HECHO CON JS -->
     </div>
 
+    <div id="formularioEnvio"></div>
+
+    
+  
+
     <div class="container carrito-container" id="carritoID">
         <div id="contenedorDivCarrito">
             <!-- ACA VA CADA PRODUCTO EN EL CARRITO HECHO CON JS -->
@@ -74,13 +76,14 @@
             <div class="row border-bottom d-flex align-items-center mx-1 rounded-lg shadow-sm py-3 bg-light">
                 <div class="col-8 lugar-de-envio d-flex justify-content-around flex-wrap  ">
                     <div class="pb-1"> Seleccione Lugar de Envío</div>
-                    <select name="" id="lugarDeEnvio" onchange="elegirEnvio()" class="rounded">
-                        <option value="0">Elegir</option>
+                    <select name="" id="lugarDeEnvio" onchange="elegirEnvio()" class="rounded" required>
+                        <!-- <option selected disabled value="0">Elegir</option> -->
                         <option value="80" id="VGB">Villa Gral Belgrano</option>
                         <option value="50" id="VR">Villa Rumipal</option>
                         <option value="70" id="SRC">Sta Rosa Calamuchita</option>
                         <option value="60" id="VDD">Villa del Dique</option>
                     </select>
+                    <div class="invalid-feedback" id="noSeleccionado"></div>
                 </div>
                 <div class="col-4 text-center">
                     <strong>Total: </strong>
@@ -89,32 +92,7 @@
             </div>
         </div>
 
-        <!-- FORMULARIO -->
-        <!-- <div class="barra my-3">
-            <div class="row border-bottom d-flex align-items-center mx-1 rounded-lg shadow-sm py-3 bg-light container">
-                <form action="">
-                    <div class="form-group">
-                        <label for="" class="py-2">Nombre</label>
-                        <input type="text" class="form-control">
-                        <label for="">Whatsapp</label>
-                        <input type="number" class="form-control">
-    
-    
-                    </div>
-
-                    <div class="form-group d-flex justify-content-center">
-                        <label for="FechaEnvio" class="pr-3">Fecha de Envio preferida</label>
-                        <input type="date" id="FechaEnvio" name="fechaEnvioName" min="2020-11-20" max="2020-11-30">
-                    </div>    
-                    <div class="form-group">
-                        <label for="">Dirección de entrega</label>
-                        <textarea name="" id="descripcion-dire" value="" cols="30" rows="10"
-                            class="form-control"></textarea>
-                    </div>
-                    
-                </form>
-            </div>
-        </div> -->
+        
 
         <div class="row ">
             <div class="col-sm-12  col-md-6 ">
@@ -125,10 +103,68 @@
             </div>
             <div class="col-sm-12 col-md-6 text-right">
                 <button
-                    class="btn btn-lg btn-block btn-warning text-uppercase shadow-sm rounded-pill pagar m-2">Pagar</button>
+                    class="btn btn-lg btn-block btn-warning text-uppercase shadow-sm rounded-pill pagar m-2" data-toggle="modal" data-target="#staticBackdrop" onclick="resumenCompra()">Pagar</button>
             </div>
         </div>
     </div>
+
+      
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="barra my-3">
+                             <div class="row border-bottom d-flex align-items-center mx-1 rounded-lg shadow-sm py-3 bg-light container">
+                                 <div id="resumenPedido">
+                        
+                                 </div>
+                                 <form action="" class="was-validated">
+                                     <div class="form-group">
+                                         <label for="" class="py-2">Nombre</label>
+                                         <input type="text" class="form-control" id="nombreCliente" required>
+                    
+                    
+                                     </div>
+                
+                                     <div class="form-group d-flex justify-content-center">
+                                         <label for="FechaEnvio" class="pr-3">Fecha de Envio preferida</label>
+                                         <input type="date" id="FechaEnvio" name="fechaEnvioName" required>
+                                     </div>    
+                                     <div class="form-group">
+                                         <label for="">Dirección de entrega</label>
+                                         <textarea name="" id="descripcion-dire" value="" cols="30" rows="5"
+                                             class="form-control" required></textarea>
+                                     </div>
+                                     <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
+                                        <a href="" id="whatsapp">
+                                        <button  class="btn btn-primary" onclick="datosWhatsapp()" type="button" >Enviar Pedido</button>
+                                          </a>
+                                      </div>
+                                 </form>
+                             </div>
+                         </div> 
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+     <!-- JS de bootstrap -->
+    
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+     integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
 
     <!-- Vinculacion con mis archivos js -->
     <script src="Producto.js"></script>
