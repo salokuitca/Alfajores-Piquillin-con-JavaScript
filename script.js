@@ -45,9 +45,8 @@ function carritoVacio() {
         <div class="d-flex justify-content-center align-items-center">
         <img src="images/cartEmpty.png" alt="">
         </div>
-        <a href="index.html" class="text-decoration-none d-flex justify-content-center align-items-center">
-                    <button class="btn btn-lg btn-block btn-warning shadow-sm rounded-pill m-2 col-3 ">Continuar
-                        Comprando</button>
+        <a href="index.html#productos" class="text-decoration-none d-flex justify-content-center align-items-center">
+                    <button class="btn btn-lg btn-block btn-warning shadow-sm rounded-pill m-2 col-12 col-md-6 "> Quiero comprar!!!</button>
                 </a>
     </div> 
     `
@@ -76,8 +75,7 @@ function precioAPagar(carrito) {
     carrito.forEach((producto) => {
         precioTotal = precioTotal + (producto.cantidadUsuario * producto.precio)
         console.log(precioTotal);
-        var total = document.getElementById("total");
-        total.innerHTML = precioTotal + " $";
+        
     })
 
 }
@@ -144,16 +142,6 @@ function crearLineaCarrito(producto) {
 
     });
 
-
-
-    $(document).on('click', '.sumar2', function () {
-        producto.cantidadUsuario = $(this).prev().val()
-        console.log(producto.cantidadUsuario);
-        var hola = document.getElementById(producto.selector)
-        hola.innerHTML = producto.cantidadUsuario * producto.precio;
-    });
-
-
     return lineaCarrito;
 
 }
@@ -166,9 +154,9 @@ function resumenCompra() {
 
     let lineaPedido = ""
     carrito.forEach((producto) => {
-        lineaPedido += `${producto.nombre} x ${producto.cantidadUsuario}u \n`;
+        lineaPedido += `<div>${producto.nombre} x ${producto.cantidadUsuario}u </div>`;
     })
-    resumenPedido.innerHTML = `Resumen de tu pedido:\n ${lineaPedido} \n ${precioTotal}`
+    resumenPedido.innerHTML = `<div class="card container "> <div class="card-title font-weight-bold">Resumen de tu pedido:</div> ${lineaPedido} Precio a pagar: $ ${precioTotal}</div>`
 
 }
 
@@ -230,7 +218,7 @@ function datosWhatsapp() {
 
 /*El lugar de envio por default es Villa General Belgrano, agrego su precio al total*/
 var total = document.getElementById("total");
-total.innerHTML = precioTotal + 80;
+total.innerHTML = precioTotal + 80 + " $";
 
 /*Función para elegir el Envio y sumar su precio*/
 function elegirEnvio() {

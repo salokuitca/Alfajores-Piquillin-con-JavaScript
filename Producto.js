@@ -29,6 +29,7 @@ function badgeCarrito(carrito) {
 }
 
 var productos = [];
+/*---------------------------------------------------------------INICIO AJAX*/
 /*Lectura de los productos desde productos.json con ajax*/
 $.ajax('productos.json').done(function (data) {
 
@@ -129,21 +130,17 @@ $.ajax('productos.json').done(function (data) {
 
     buttonCarrito.addEventListener("click", () => {
       var pruebaDeId = producto.id;
-      console.log(pruebaDeId)
-      producto.cantidadUsuario = input.value;
-      console.log("antes for each" + producto.cantidadUsuario)
       var verificar = false;
-      carrito.forEach((producto) => {
+
+      carrito.forEach((producto) => { 
         if (pruebaDeId == producto.id) {
-          console.log("antes de sumar" + producto.cantidadUsuario)
-          cantidadNueva = parseInt(producto.cantidadUsuario) + parseInt(input.value);
-          producto.cantidadUsuario = cantidadNueva;
-          console.log("cantidad nueva" + cantidadNueva)
+          producto.cantidadUsuario = parseInt(producto.cantidadUsuario) + parseInt(input.value);  
           verificar = true;
         }
       })
 
       if (verificar == false) {
+        producto.cantidadUsuario = input.value;
         carrito.push(producto);
       }
       input.value = 0
@@ -168,9 +165,5 @@ $.ajax('productos.json').done(function (data) {
   }
 
   /*Fin Función para crear la card de cada producto*/
-
-
-
-
-
 })
+/*------------------------------------------------------------------FIN AJAX*/

@@ -51,7 +51,7 @@
                 </ul>
             </div>
             <div class="cart-div">
-                <a href="carrito.html"><img src="images/cart.svg" class="cart" alt=""></a>
+                <a href="carrito.html"><img src="images/cart.svg" class="cart" alt="icono carrito"></a>
                 <span class="badge badge-pill badge-dark" id="cantidadCarrito2"></span>
             </div>
 
@@ -74,7 +74,7 @@
         </div>
         <div class="barra my-3">
             <div class="row border-bottom d-flex align-items-center mx-1 rounded-lg shadow-sm py-3 bg-light">
-                <div class="col-8 lugar-de-envio d-flex justify-content-around flex-wrap  ">
+                <div class="col-7 lugar-de-envio d-flex justify-content-around flex-wrap  ">
                     <div class="pb-1"> Seleccione Lugar de Envío</div>
                     <select name="" id="lugarDeEnvio" onchange="elegirEnvio()" class="rounded" required>
                         <!-- <option selected disabled value="0">Elegir</option> -->
@@ -85,7 +85,7 @@
                     </select>
                     <div class="invalid-feedback" id="noSeleccionado"></div>
                 </div>
-                <div class="col-4 text-center">
+                <div class="col-5 text-center">
                     <strong>Total: </strong>
                     <strong id="total"></strong>
                 </div>
@@ -97,13 +97,12 @@
         <div class="row ">
             <div class="col-sm-12  col-md-6 ">
                 <a href="index.html" class="text-decoration-none ">
-                    <button class="btn btn-lg btn-block btn-light shadow-sm rounded-pill m-2">Continuar
-                        Comprando</button>
+                    <button class="btn btn-lg btn-block btn-light shadow-sm rounded-pill m-2">Volver</button>
                 </a>
             </div>
             <div class="col-sm-12 col-md-6 text-right">
                 <button
-                    class="btn btn-lg btn-block btn-warning text-uppercase shadow-sm rounded-pill pagar m-2" data-toggle="modal" data-target="#staticBackdrop" onclick="resumenCompra()">Pagar</button>
+                    class="btn btn-lg btn-block btn-warning text-uppercase shadow-sm rounded-pill pagar m-2" data-toggle="modal" data-target="#staticBackdrop" onclick="resumenCompra()">Continuar Compra</button>
             </div>
         </div>
     </div>
@@ -114,14 +113,14 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+              <h5 class="modal-title" id="staticBackdropLabel">Completa tus datos</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-                <div class="barra my-3">
-                             <div class="row border-bottom d-flex align-items-center mx-1 rounded-lg shadow-sm py-3 bg-light container">
+                <!-- <div class="barra my-3"> -->
+                             <div class="barra row border-bottom d-flex align-items-center justify-content-center mx-1 rounded-lg shadow-sm py-3 bg-light container">
                                  <div id="resumenPedido">
                         
                                  </div>
@@ -142,7 +141,7 @@
                                          <textarea name="" id="descripcion-dire" value="" cols="30" rows="5"
                                              class="form-control" required></textarea>
                                      </div>
-                                     <div class="modal-footer">
+                                     <div class="modal-footer d-flex justify-content-around">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Volver</button>
                                         <a href="" id="whatsapp">
                                         <button  class="btn btn-primary" onclick="datosWhatsapp()" type="button" >Enviar Pedido</button>
@@ -150,7 +149,7 @@
                                       </div>
                                  </form>
                              </div>
-                         </div> 
+                         <!-- </div>  -->
             </div>
            
           </div>
