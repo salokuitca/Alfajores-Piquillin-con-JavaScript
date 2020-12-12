@@ -147,6 +147,20 @@ function crearLineaCarrito(producto) {
 }
 /*Fin Creación y carga de productos en carrito*/
 
+/*El lugar de envio por default es Villa General Belgrano, agrego su precio al total*/
+var total = document.getElementById("total");
+total.innerHTML = precioTotal + 80 + " $";
+
+var precioEnvio = 80;
+/*Función para elegir el Envio y sumar su precio*/
+function elegirEnvio() {
+
+    $("#precioEnvio").html($("#lugarDeEnvio option:selected").val());
+    var total = document.getElementById("total");
+    precioEnvio = parseInt($("#lugarDeEnvio option:selected").val());
+    total.innerHTML = precioTotal + precioEnvio + " $";
+
+}
 
 function resumenCompra() {
 
@@ -156,7 +170,7 @@ function resumenCompra() {
     carrito.forEach((producto) => {
         lineaPedido += `<div>${producto.nombre} x ${producto.cantidadUsuario}u </div>`;
     })
-    resumenPedido.innerHTML = `<div class="card container "> <div class="card-title font-weight-bold">Resumen de tu pedido:</div> ${lineaPedido} Precio a pagar: $ ${precioTotal}</div>`
+    resumenPedido.innerHTML = `<div class="card container "> <div class="card-title font-weight-bold">Resumen de tu pedido:</div> ${lineaPedido} <hr> <div>Precio Envio: $ ${precioEnvio}</div> Precio a pagar: $ ${precioTotal + precioEnvio}</div>`
 
 }
 
@@ -199,14 +213,15 @@ function datosWhatsapp() {
 
     var fechaDireEnvio = (`Para%20enviar%20el%20${fecha}%20a%20${dire}%20en%20${lugarEnvio}`)
 
-    var totalWhatsapp = (`Por%20un%20total%20de:%20$${precioTotal}`)
+    var totalWhatsapp = (`Por%20un%20total%20de:%20$${precioTotal+precioEnvio}`)
 
     var mensaje = `${mensajeNombre}%0A${lineaPedidoWhatsapp2}${fechaDireEnvio}%0A${totalWhatsapp}`
 
+    var link = `https://api.whatsapp.com/send?phone=34685497874&text=${mensaje}`
+    
+    //var link = `https://wa.me/34685497874?text=${mensaje}`
 
-    var link = `https://wa.me/34685497874?text=${mensaje}`
-
-
+    
 
     var wp = document.getElementById("whatsapp");
     wp.setAttribute('href', link);
@@ -216,14 +231,3 @@ function datosWhatsapp() {
 
 
 
-/*El lugar de envio por default es Villa General Belgrano, agrego su precio al total*/
-var total = document.getElementById("total");
-total.innerHTML = precioTotal + 80 + " $";
-
-/*Función para elegir el Envio y sumar su precio*/
-function elegirEnvio() {
-
-    $("#precioEnvio").html($("#lugarDeEnvio option:selected").val());
-    var total = document.getElementById("total");
-    total.innerHTML = precioTotal + parseInt($("#lugarDeEnvio option:selected").val()) + " $";
-}
