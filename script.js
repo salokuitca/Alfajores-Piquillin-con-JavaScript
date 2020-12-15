@@ -170,7 +170,7 @@ function resumenCompra() {
     carrito.forEach((producto) => {
         lineaPedido += `<div>${producto.nombre} x ${producto.cantidadUsuario}u </div>`;
     })
-    resumenPedido.innerHTML = `<div class="card container "> <div class="card-title font-weight-bold">Resumen de tu pedido:</div> ${lineaPedido} <hr> <div>Precio Envio: $ ${precioEnvio}</div> Precio a pagar: $ ${precioTotal + precioEnvio}</div>`
+    resumenPedido.innerHTML = `<div class="card container "> <div class="card-title font-weight-bold">Resumen de tu pedido:</div> ${lineaPedido} <hr> <div>Precio Envio: $ ${precioEnvio}</div> <strong>Precio a pagar: $ ${precioTotal + precioEnvio}</strong></div>`
 
 }
 
