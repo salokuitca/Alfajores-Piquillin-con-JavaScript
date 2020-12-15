@@ -227,6 +227,16 @@ footer a img {
   margin-bottom: 2px;
 }
 
+input[type=number] {
+  -moz-appearance: textfield;
+  /*For FireFox*/
+}
+input[type=number]::-webkit-inner-spin-button {
+  /*For Webkits like Chrome and Safari*/
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* Animacion Titulo */
 @keyframes slidein {
   from {
