@@ -1,23 +1,22 @@
 /* Inicio Declaracion del Objeto Producto*/
-//Cada producto se vende solo en las cantidades determinadas: 6, 12 o 24
+
 class Producto {
 
-  constructor(id, nombre, precio, imagen, descripcion, cantidadUsuario, stock, selector) {
+  constructor(id, nombre, precio, imagen, descripcion, cantidadUsuario) {
     this.id = id;
     this.nombre = nombre;
     this.precio = precio;
     this.imagen = imagen;
     this.descripcion = descripcion;
-    this.cantidadUsuario = cantidadUsuario;
-    this.stock = stock
-
-
+    this.cantidadUsuario = cantidadUsuario
   }
 }
 /*Fin Declaracion del Objeto Producto*/
+
+/*Función para mostrar cantidad de productos en carrito en el widget*/
 function badgeCarrito(carrito) {
   if (carrito.length) {
-    var carritoMenu = document.getElementById("cantidadCarrito");
+    let carritoMenu = document.getElementById("cantidadCarrito");
     cantidadCarrito = 0;
     carrito.forEach((producto) => {
       cantidadCarrito = cantidadCarrito + parseInt(producto.cantidadUsuario);
@@ -28,30 +27,33 @@ function badgeCarrito(carrito) {
   }
 }
 
-var productos = [];
+let productos = [];
+
 /*---------------------------------------------------------------INICIO AJAX*/
 /*Lectura de los productos desde productos.json con ajax*/
-$.ajax('productos.json').done(function (data) {
+$.ajax('database/productos.json').done(function (data) {
 
-  productos = data
-  console.log(productos)
-  // productos.forEach(function (producto) {
-  var productos2 = productos.map(
-    (value) => new Producto(value.id, value.nombre, value.precio, value.imagen, value.descripcion, value.cantidadUsuario, value.stock)
+  productos = data;
+  
+  
+  let productos2 = productos.map(
+    (value) => new Producto(value.id, value.nombre, value.precio, value.imagen, value.descripcion, value.cantidadUsuario)
   );
-  //  })
+  
 
   productos = productos2;
-  console.log(productos)
+  
 
+  /*Creación cards de Productos en home*/
   productos.forEach((producto) => {
-    var cardProductos = crearCardProductos(producto);
+    let cardProductos = crearCardProductos(producto);
     contenedorCards.appendChild(cardProductos);
   })
+
   /*Función para indicar que se agregó el pedido al carrito*/
   $('.agregar').click(function () {
-    var $this = $(this);
-    var textoOriginal = $this.text();
+    let $this = $(this);
+    let textoOriginal = $this.text();
 
     $this.text('Agregado');
     $this.removeClass('btn-dark');
@@ -62,15 +64,16 @@ $.ajax('productos.json').done(function (data) {
     }, 1000);
   });
 
-  /*Inicio Función para crear la card de cada producto*/
+  
   badgeCarrito(carrito);
-
+  
+  /*Inicio Función para crear la card de cada producto*/
   function crearCardProductos(producto) {
-    var cardProducto = document.createElement("div");
+    let cardProducto = document.createElement("div");
     cardProducto.id = producto.id;
     cardProducto.classList = "card mb-4 producto";
 
-    var elementosHTML = ` 
+    let elementosHTML = ` 
   <div> 
       <img src='${producto.imagen}' alt='${producto.nombre}' title='${producto.nombre}' class="card-img-top imagen-card">
   </div>
@@ -81,19 +84,19 @@ $.ajax('productos.json').done(function (data) {
     cardProducto.innerHTML = elementosHTML;
 
 
-    var divContenedorBotones = document.createElement("div");
+    let divContenedorBotones = document.createElement("div");
     divContenedorBotones.classList = "btn-toolbar d-flex justify-content-between p-3";
 
-    var divContenedorSumayResta = document.createElement("div");
+    let divContenedorSumayResta = document.createElement("div");
     divContenedorSumayResta.classList = "btn-group btn-group-toggle";
 
-    var inputMenos = document.createElement("input");
+    let inputMenos = document.createElement("input");
     inputMenos.type = "button";
     inputMenos.value = "-";
     inputMenos.classList = "btn btn-secondary restar"
     inputMenos.innerHTML = "";
 
-    var input = document.createElement("input");
+    let input = document.createElement("input");
     input.type = "number";
     input.value = "0";
     input.id = producto.id;
@@ -101,26 +104,26 @@ $.ajax('productos.json').done(function (data) {
     input.setAttribute('disabled', 'disabled');
     input.innerHTML = "";
 
-    var inputMas = document.createElement("input");
+    let inputMas = document.createElement("input");
     inputMas.type = "button";
     inputMas.value = "+";
-    inputMas.classList = "btn btn-secondary sumar"
+    inputMas.classList = "btn btn-secondary sumar";
     inputMas.innerHTML = "";
 
 
-    var divAgregarCarrito = document.createElement("div");
+    let divAgregarCarrito = document.createElement("div");
 
-    var buttonCarrito = document.createElement("button");
+    let buttonCarrito = document.createElement("button");
     buttonCarrito.type = "button";
     buttonCarrito.classList = "btn btn-group btn-dark btn-success agregar";
-    buttonCarrito.innerHTML = "Agregar al Carrito"
+    buttonCarrito.innerHTML = "Agregar al Carrito";
 
     if (input.value == 0) {
       buttonCarrito.setAttribute('disabled', 'disabled');
     }
 
     inputMas.addEventListener("click", () => {
-      buttonCarrito.removeAttribute('disabled')
+      buttonCarrito.removeAttribute('disabled');
     })
 
     inputMenos.addEventListener("click", () => {
@@ -129,8 +132,8 @@ $.ajax('productos.json').done(function (data) {
     })
 
     buttonCarrito.addEventListener("click", () => {
-      var pruebaDeId = producto.id;
-      var verificar = false;
+      let pruebaDeId = producto.id;
+      let verificar = false;
 
       carrito.forEach((producto) => { 
         if (pruebaDeId == producto.id) {
