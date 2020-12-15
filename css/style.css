@@ -227,6 +227,7 @@ footer a img {
   margin-bottom: 2px;
 }
 
+/*Webkit para que se deshabiliten las flechas del input en mozilla*/
 input[type=number] {
   -moz-appearance: textfield;
   /*For FireFox*/
