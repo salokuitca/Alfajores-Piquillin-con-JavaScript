@@ -15,8 +15,9 @@ class Producto {
 
 /*Función para mostrar cantidad de productos en carrito en el widget*/
 function badgeCarrito(carrito) {
+  let carritoMenu = document.getElementById("cantidadCarrito");
   if (carrito.length) {
-    let carritoMenu = document.getElementById("cantidadCarrito");
+    
     cantidadCarrito = 0;
     carrito.forEach((producto) => {
       cantidadCarrito = cantidadCarrito + parseInt(producto.cantidadUsuario);

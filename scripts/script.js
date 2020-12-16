@@ -60,7 +60,9 @@ function carritoVacio() {
     </div> 
     `
     let carritoVacio = document.getElementById("carritoVacio");
+    if (carritoVacio) {
     carritoVacio.innerHTML = elementosHTML;
+    }
 }
 /* Fin Función que se ejecuta cuando no hay productos en el carrito*/
 
