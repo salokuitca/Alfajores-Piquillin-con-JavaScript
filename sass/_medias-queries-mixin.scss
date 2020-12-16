@@ -2,6 +2,7 @@
 
 @mixin mobile {
     @media only screen and (max-width: 426px) {
+
         /* Inicio Estilo mobile Sección Productos*/
         .imagenes-presentaciones {
             img {
@@ -27,7 +28,8 @@
         }
 
         /*Estilos mobile de carrito.html*/
-        .descripcion-pdto-encarrito, .lugar-de-envio {
+        .descripcion-pdto-encarrito,
+        .lugar-de-envio {
             font-size: $font-size-mobile;
         }
 
@@ -40,6 +42,7 @@
 
 @mixin tablet {
     @media only screen and (min-width: 427px) and (max-width: 960px) {
+
         /*Estilo tablet Sección Producto*/
         .descripcion-caja {
             max-width: 30% !important;

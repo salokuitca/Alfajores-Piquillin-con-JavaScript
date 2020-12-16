@@ -16,7 +16,7 @@ function getProductosDesdeLocalStorage() {
     if (carritoEnLocalStorage) {
         /* objetos parseados a partir del string */
         const objetosEnLocalStorage = JSON.parse(carritoEnLocalStorage);
-        
+
         objetosEnLocalStorage.forEach((object) => {
             /* Transformamos nuestros objetos a Productos y los agregamos al carrito */
             let producto = new Producto(
@@ -61,7 +61,7 @@ function carritoVacio() {
     `
     let carritoVacio = document.getElementById("carritoVacio");
     if (carritoVacio) {
-    carritoVacio.innerHTML = elementosHTML;
+        carritoVacio.innerHTML = elementosHTML;
     }
 }
 /* Fin Función que se ejecuta cuando no hay productos en el carrito*/
@@ -79,7 +79,7 @@ carrito.forEach((producto) => {
     /*Llama a la función que crea cada linea del carrito*/
     let lineaCarrito = crearLineaCarrito(producto);
     if (contenedorDivCarrito) {
-    contenedorDivCarrito.appendChild(lineaCarrito);
+        contenedorDivCarrito.appendChild(lineaCarrito);
     }
 })
 
@@ -133,7 +133,7 @@ function crearLineaCarrito(producto) {
             return product.id != $(event.target).attr('id');
         })
 
-        
+
         if (carrito.length) {
             localStorage.setItem('carrito', JSON.stringify(carrito));
             lineaCarrito.remove();
@@ -167,7 +167,7 @@ function crearLineaCarrito(producto) {
 let precioEnvio = 80;
 let total = document.getElementById("total");
 if (total) {
-total.innerHTML = precioTotal + precioEnvio + " $";
+    total.innerHTML = precioTotal + precioEnvio + " $";
 }
 
 /*Función para elegir el Envio y sumar su precio*/
@@ -184,39 +184,39 @@ var verificarPromo;
 function promo() {
     verificarPromo = true;
 
-    sessionStorage.setItem('promo', JSON.stringify(verificarPromo));   
+    sessionStorage.setItem('promo', JSON.stringify(verificarPromo));
 }
 
 
 /*Función para el resumen de la compra en modal para envio del pedido*/
 function resumenCompra() {
-   
+
     let lineaPedido = ""
     carrito.forEach((producto) => {
         lineaPedido += `<div>${producto.nombre} x ${producto.cantidadUsuario}u </div>`;
     })
     resumenPedido.innerHTML = `<div class="card container "> <div class="card-title font-weight-bold">Resumen de tu pedido:</div> ${lineaPedido} <hr> <div>Precio Envio: $ ${precioEnvio}</div> <strong>Precio a pagar: $ ${precioTotal + precioEnvio}</strong></div>`
-   
+
 }
 
 /*Inicio Función para armar el mensaje de pedido en whatsapp*/
 function datosWhatsapp() {
-    let promoRecuperada = JSON.parse (sessionStorage.getItem('promo'));
-    let nombre = document.getElementById("nombreCliente").value; 
-    let dire = document.getElementById("descripcion-dire").value; 
-    let fecha = document.getElementById("FechaEnvio").value; 
+    let promoRecuperada = JSON.parse(sessionStorage.getItem('promo'));
+    let nombre = document.getElementById("nombreCliente").value;
+    let dire = document.getElementById("descripcion-dire").value;
+    let fecha = document.getElementById("FechaEnvio").value;
 
     let mensajeNombre = (`Hola!%20Mi%20nombre%20es%20${nombre},%20quisiera%20los%20siguientes%20productos:%20`);
     let lineaPedidoWhatsapp = "";
     let productoNombre = "";
     carrito.forEach((producto) => {
         productoNombre = producto.nombre.replaceAll(' ', '%20');
-        
+
         lineaPedidoWhatsapp += `${productoNombre} x ${producto.cantidadUsuario}u %0A`;
 
     });
     let lineaPedidoWhatsapp2 = lineaPedidoWhatsapp.replaceAll(' ', '%20');
-    
+
 
     let lugarEnvio = document.getElementById("lugarDeEnvio").value;
 
@@ -239,7 +239,7 @@ function datosWhatsapp() {
     /*Aplicar promo piquibola en el pedido en whatsapp*/
     let promoAgregada = ""
     if (promoRecuperada) {
-        
+
         promoAgregada = "Aplicar%20promo%20Piquibola";
     } else {
         promoAgregada = "";
@@ -253,14 +253,11 @@ function datosWhatsapp() {
     let mensaje = `${mensajeNombre}%0A${lineaPedidoWhatsapp2}${fechaDireEnvio}%0A${totalWhatsapp}%0A${promoAgregada}`
 
     let link = `https://api.whatsapp.com/send?phone=34685497874&text=${mensaje}`
-    
-    
+
+
     let wp = document.getElementById("whatsapp");
     wp.setAttribute('href', link);
     wp.setAttribute('target', '_blank');
 
 }
 /*Fin Función para armar el mensaje de pedido en whatsapp*/
-
-
-

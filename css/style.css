@@ -209,7 +209,8 @@ footer a img {
 }
 
 /*Estilos de carrito.html*/
-.carrito-container, .carrito-vacio {
+.carrito-container,
+.carrito-vacio {
   margin-top: 100px;
 }
 
@@ -259,7 +260,8 @@ footer a img {
   }
 
   /*Estilos mobile de carrito.html*/
-  .descripcion-pdto-encarrito, .lugar-de-envio {
+  .descripcion-pdto-encarrito,
+.lugar-de-envio {
     font-size: smaller;
   }
 

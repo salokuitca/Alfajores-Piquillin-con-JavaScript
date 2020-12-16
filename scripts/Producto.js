@@ -17,15 +17,15 @@ class Producto {
 function badgeCarrito(carrito) {
   let carritoMenu = document.getElementById("cantidadCarrito");
   if (carrito.length) {
-    
+
     cantidadCarrito = 0;
     carrito.forEach((producto) => {
       cantidadCarrito = cantidadCarrito + parseInt(producto.cantidadUsuario);
     })
     if (carritoMenu) {
-    carritoMenu.innerHTML = cantidadCarrito;
+      carritoMenu.innerHTML = cantidadCarrito;
     }
-  } 
+  }
 }
 
 let productos = [];
@@ -35,21 +35,21 @@ let productos = [];
 $.ajax('database/productos.json').done(function (data) {
 
   productos = data;
-  
-  
+
+
   let productos2 = productos.map(
     (value) => new Producto(value.id, value.nombre, value.precio, value.imagen, value.descripcion, value.cantidadUsuario)
   );
-  
+
 
   productos = productos2;
-  
+
   var contenedorCards = document.getElementById("contenedorCards");
   /*Creación cards de Productos en home*/
   productos.forEach((producto) => {
     let cardProductos = crearCardProductos(producto);
     if (contenedorCards) {
-    contenedorCards.appendChild(cardProductos);
+      contenedorCards.appendChild(cardProductos);
     }
   })
 
@@ -67,9 +67,9 @@ $.ajax('database/productos.json').done(function (data) {
     }, 1000);
   });
 
-  
+
   badgeCarrito(carrito);
-  
+
   /*Inicio Función para crear la card de cada producto*/
   function crearCardProductos(producto) {
     let cardProducto = document.createElement("div");
@@ -138,9 +138,9 @@ $.ajax('database/productos.json').done(function (data) {
       let pruebaDeId = producto.id;
       let verificar = false;
 
-      carrito.forEach((producto) => { 
+      carrito.forEach((producto) => {
         if (pruebaDeId == producto.id) {
-          producto.cantidadUsuario = parseInt(producto.cantidadUsuario) + parseInt(input.value);  
+          producto.cantidadUsuario = parseInt(producto.cantidadUsuario) + parseInt(input.value);
           verificar = true;
         }
       })

@@ -75,7 +75,8 @@ html {
 
 .cart-div:hover {
     transform: scale(1.15);
-    filter: opacity(0.8);;
+    filter: opacity(0.8);
+    ;
 }
 
 /*Estilos del párrafo descriptivo*/
@@ -109,11 +110,13 @@ h2 {
 /*Inicio estilos sección Productos (main)*/
 .producto {
     max-width: 400px;
-    
+
 }
+
 .cantidad-carrito {
-        width: 65px !important;
-    }
+    width: 65px !important;
+}
+
 .imagen-card {
     height: auto;
 }
@@ -222,7 +225,7 @@ h2 {
 footer {
     height: 30px;
     background-color: $background-color-menu;
-    
+
 
     a {
         img {
@@ -232,15 +235,17 @@ footer {
 }
 
 /*Estilos de carrito.html*/
-.carrito-container, .carrito-vacio {
+.carrito-container,
+.carrito-vacio {
     margin-top: 100px;
 }
 
 .carrito-vacio div {
     font-size: $font-size-h1;
 }
+
 .carrito-vacio img {
-     width: 50%;
+    width: 50%;
 }
 
 .img-modal-envio {
@@ -252,7 +257,7 @@ footer {
 /*Webkit para que se deshabiliten las flechas del input en mozilla*/
 // input[type='number'] {
 //     -moz-appearance: textfield;/*For FireFox*/
-  
+
 //     &::-webkit-inner-spin-button { /*For Webkits like Chrome and Safari*/
 //       -webkit-appearance: none;
 //       margin: 0;
