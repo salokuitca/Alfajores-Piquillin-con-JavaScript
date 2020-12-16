@@ -72,11 +72,13 @@ if (carrito == "") {
 
 /*-------------------Inicio Creación y carga de productos en carrito*/
 let precioTotal = 0;
-
+contenedorDivCarrito = document.getElementById("contenedorDivCarrito");
 carrito.forEach((producto) => {
     /*Llama a la función que crea cada linea del carrito*/
     let lineaCarrito = crearLineaCarrito(producto);
+    if (contenedorDivCarrito) {
     contenedorDivCarrito.appendChild(lineaCarrito);
+    }
 })
 
 /*Llamado a función para calcular el precio total*/
@@ -162,8 +164,9 @@ function crearLineaCarrito(producto) {
 /*El lugar de envio por default es Villa General Belgrano, agrego su precio al total*/
 let precioEnvio = 80;
 let total = document.getElementById("total");
+if (total) {
 total.innerHTML = precioTotal + precioEnvio + " $";
-
+}
 
 /*Función para elegir el Envio y sumar su precio*/
 function elegirEnvio() {

@@ -21,7 +21,9 @@ function badgeCarrito(carrito) {
     carrito.forEach((producto) => {
       cantidadCarrito = cantidadCarrito + parseInt(producto.cantidadUsuario);
     })
+    if (carritoMenu) {
     carritoMenu.innerHTML = cantidadCarrito;
+    }
   } else {
     carritoMenu.innerHTML = ""
   }
@@ -43,11 +45,13 @@ $.ajax('database/productos.json').done(function (data) {
 
   productos = productos2;
   
-
+  var contenedorCards = document.getElementById("contenedorCards");
   /*Creación cards de Productos en home*/
   productos.forEach((producto) => {
     let cardProductos = crearCardProductos(producto);
+    if (contenedorCards) {
     contenedorCards.appendChild(cardProductos);
+    }
   })
 
   /*Función para indicar que se agregó el pedido al carrito*/
