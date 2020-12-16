@@ -25,9 +25,7 @@ function badgeCarrito(carrito) {
     if (carritoMenu) {
     carritoMenu.innerHTML = cantidadCarrito;
     }
-  } else {
-    carritoMenu.innerHTML = ""
-  }
+  } 
 }
 
 let productos = [];
